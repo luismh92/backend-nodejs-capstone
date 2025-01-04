@@ -42,8 +42,8 @@ router.post('/', upload.single('file'), async(req, res,next) => {
 
         const db = await connectToDatabase();
         const collection = db.collection("secondChanceItems");
-        const secondChanceItem = req.body;
-        const lastItemQuery = await collection.find().sort({'id': -1}).limit(1);
+        let secondChanceItem = req.body;
+        let lastItemQuery = await collection.find().sort({'id': -1}).limit(1);
         await lastItemQuery.forEach(item => {
             secondChanceItem.id = (parseInt(item.id) + 1).toString();
         });
@@ -52,6 +52,7 @@ router.post('/', upload.single('file'), async(req, res,next) => {
         secondChanceItem = await collection.insertOne(secondChanceItem);
         res.status(201).json(secondChanceItem.ops[0]);
     } catch (e) {
+        console.log(e)
         next(e);
     }
 });
