@@ -35,7 +35,7 @@ app.post('/sentiment', async (req, res) => {
     try {
         const analysisResult = analyzer.getSentiment(sentence.split(' '));
 
-        llet sentiment = "neutral"; // Default sentiment
+        let sentiment = "neutral"; // Default sentiment
 
         // Task 5: set sentiment based on score rules
         if (analysisResult < 0) {
