@@ -60,7 +60,7 @@ router.post('/', upload.single('file'), async(req, res,next) => {
 // Get a single secondChanceItem by ID
 router.get('/:id', async (req, res, next) => {
     try {
-        const db = connectToDatabase();
+        const db = await connectToDatabase();
         const collection = db.collection("secondChanceItems");
         const id = req.params.id
         const secondChanceItem = await collection.findOne({ id: id });
@@ -78,7 +78,7 @@ router.get('/:id', async (req, res, next) => {
 // Update and existing item
 router.put('/:id', async(req, res,next) => {
     try {
-        const db = connectToDatabase();
+        const db = await connectToDatabase();
         const collection = db.collection("secondChanceItems");
         const secondChanceItem = await collection.findOne({ id: id });
         if (!secondChanceItem) {
@@ -112,7 +112,7 @@ router.put('/:id', async(req, res,next) => {
 // Delete an existing item
 router.delete('/:id', async(req, res,next) => {
     try {
-        const db = connectToDatabase();
+        const db = await connectToDatabase();
         const collection = db.collection("secondChanceItems");
         const secondChanceItem = await collection.findOne({ id: id });
         if (!secondChanceItem) {
